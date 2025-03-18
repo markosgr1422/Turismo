@@ -1,0 +1,183 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #2c6e49; /* Verde fuerte */
+    color: white;
+    padding: 20px;
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.header a:hover {
+    color: #d4e1d3; /* Verde suave al pasar el ratón */
+}
+
+/* Main Container */
+.container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Title */
+h2 {
+    color: #2c6e49; /* Verde fuerte */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Message */
+.message {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #333;
+    text-align: center;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+}
+
+input[type="text"], select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #2c6e49; /* Verde fuerte al enfocar */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #2c6e49; /* Verde fuerte */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #237238; /* Verde oscuro al pasar el ratón */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    background-color: #2c6e49;
+    color: white;
+    font-weight: 600;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label, input[type="text"], select {
+        font-size: 0.9rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    form {
+        gap: 8px;
+    }
+
+    label, input[type="text"], select {
+        font-size: 0.85rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 7px 14px;
+    }
+}

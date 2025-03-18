@@ -1,0 +1,95 @@
+-- Crear la base de datos si no existe
+CREATE DATABASE IF NOT EXISTS turismo2025;
+
+-- Usar la base de datos recién creada
+USE turismo2025;
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    nombre_usuario VARCHAR(50) UNIQUE,
+    contraseña VARCHAR(255),
+    permisos JSON
+);
+
+-- Tabla de pasajeros
+CREATE TABLE IF NOT EXISTS pasajeros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    dni VARCHAR(20)
+);
+
+-- Tabla de contratos
+CREATE TABLE IF NOT EXISTS contratos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero_referencia VARCHAR(50) UNIQUE,
+    nombre_contrato VARCHAR(100),
+    nombre_hotel VARCHAR(100),
+    cantidad_dias INT,
+    cantidad_noches INT,
+    monto DECIMAL(10,2),
+    año INT
+);
+
+-- Tabla de relación entre contratos y pasajeros
+CREATE TABLE IF NOT EXISTS cg_pasajeros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contrato_id INT,
+    pasajero_id INT,
+    credencial_pago VARCHAR(20) UNIQUE,
+    usuario_id INT,
+    FOREIGN KEY (contrato_id) REFERENCES contratos(id),
+    FOREIGN KEY (pasajero_id) REFERENCES pasajeros(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Tabla de pagos
+CREATE TABLE IF NOT EXISTS pagos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pasajero_id INT,
+    contrato_id INT,
+    monto DECIMAL(10,2),
+    fecha DATE,
+    metodo_pago VARCHAR(50),
+    numero_transaccion VARCHAR(50) NOT NULL,
+    credencial_pago VARCHAR(20),
+    numero_transferencia VARCHAR(50),  -- Número de transferencia (nuevo)
+    monto_transferencia DECIMAL(10,2), -- Monto de transferencia (nuevo)
+    usuario_id INT,
+    FOREIGN KEY (pasajero_id) REFERENCES pasajeros(id),
+    FOREIGN KEY (contrato_id) REFERENCES contratos(id),
+    FOREIGN KEY (credencial_pago) REFERENCES cg_pasajeros(credencial_pago),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    UNIQUE (credencial_pago, numero_transaccion),
+    UNIQUE (credencial_pago, numero_transferencia)  -- Aseguramos que no se repita un número de transferencia
+);
+
+-- Tabla de caja
+CREATE TABLE IF NOT EXISTS caja (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Ingreso', 'Gasto'),
+    descripcion VARCHAR(255),
+    monto DECIMAL(10,2),
+    fecha DATE,
+    comprobante VARCHAR(50)
+);
+
+-- Agregar la columna id_cobrador a la tabla pagos
+ALTER TABLE pagos
+ADD COLUMN id_cobrador INT;
+
+-- Agregar la restricción FOREIGN KEY para id_cobrador
+ALTER TABLE pagos
+ADD FOREIGN KEY (id_cobrador) REFERENCES usuarios(id);
+
+-- Insertar el usuario Marcos con todos los permisos
+INSERT INTO usuarios (nombre, apellido, nombre_usuario, contraseña, permisos)
+VALUES ('Marcos', 'Reyes', 'marcos', MD5('123'), '{"datos_usuario": true, "datos_pasajeros": true, "pagos": true, "contratos": true, "caja": true}');
+
+-- Agregar las columnas fecha_salida y fecha_retorno a la tabla contratos
+ALTER TABLE contratos
+ADD COLUMN fecha_salida DATE,
+ADD COLUMN fecha_retorno DATE;
