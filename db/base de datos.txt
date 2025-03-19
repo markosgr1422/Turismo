@@ -87,7 +87,7 @@ ADD FOREIGN KEY (id_cobrador) REFERENCES usuarios(id);
 
 -- Insertar el usuario Marcos con todos los permisos
 INSERT INTO usuarios (nombre, apellido, nombre_usuario, contraseña, permisos)
-VALUES ('Marcos', 'Reyes', 'marcos', MD5('123'), '{"datos_usuario": true, "datos_pasajeros": true, "pagos": true, "contratos": true, "caja": true}');
+VALUES ('Marcos', 'Reyes', 'marcos', MD5('154084514'), '{"datos_usuario": true, "datos_pasajeros": true, "pagos": true, "contratos": true, "caja": true}');
 
 -- Agregar las columnas fecha_salida y fecha_retorno a la tabla contratos
 ALTER TABLE contratos
