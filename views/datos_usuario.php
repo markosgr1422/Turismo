@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'datos_pasajeros' => isset($_POST['permisos']['datos_pasajeros']),
                 'pagos' => isset($_POST['permisos']['pagos']),
                 'contratos' => isset($_POST['permisos']['contratos']),
+                'reportes' => isset($_POST['permisos']['reportes']),
                 'caja' => isset($_POST['permisos']['caja'])
             ];
 
@@ -132,6 +133,7 @@ if ($result->num_rows > 0) {
                 <input type="checkbox" name="permisos[datos_pasajeros]"> Datos de Pasajeros<br>
                 <input type="checkbox" name="permisos[pagos]"> Pagos<br>
                 <input type="checkbox" name="permisos[contratos]"> Contratos<br>
+                <input type="checkbox" name="permisos[reportes]"> Reportes<br>
                 <input type="checkbox" name="permisos[caja]"> Caja<br>
             </div>
             <div class="form-group">

@@ -74,6 +74,14 @@ $permisos = isset($_SESSION['permisos']) ? $_SESSION['permisos'] : [];
                     </div>
                 </a>
             <?php endif; ?>
+            <?php if (in_array('caja', $permisos)) : ?>
+                <a href="reportes.php" class="dashboard-link">
+                    <div class="dashboard-item">
+                        <h3>Salidas</h3>
+                        <p>Informe Completo de Salidas</p>
+                    </div>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </body>

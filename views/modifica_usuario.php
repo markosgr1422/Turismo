@@ -13,14 +13,16 @@ if (!isset($_SESSION['permisos']['datos_usuario']) || $_SESSION['permisos']['dat
     exit();
 }
 
-// Configuración de conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "launionsgo2024";
+// Incluir la configuración de la base de datos
+require '../db/db_config.php';
 
-// Mensaje para mostrar resultados de operaciones
-$message = '';
+// Conexión a la base de datos
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Mensajes de éxito y error
 
 // Obtener el ID del usuario a modificar desde la URL
 if (!isset($_GET['id'])) {
@@ -49,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'datos_pasajeros' => isset($_POST['permisos']['datos_pasajeros']),
         'pagos' => isset($_POST['permisos']['pagos']),
         'contratos' => isset($_POST['permisos']['contratos']),
+        'reportes' => isset($_POST['permisos']['reportes']),
         'caja' => isset($_POST['permisos']['caja'])
     ];
 
@@ -147,6 +150,7 @@ $conn->close();
                 <input type="checkbox" name="permisos[datos_pasajeros]" <?php echo $permisos_usuario['datos_pasajeros'] ? 'checked' : ''; ?>> Datos de Pasajeros<br>
                 <input type="checkbox" name="permisos[pagos]" <?php echo $permisos_usuario['pagos'] ? 'checked' : ''; ?>> Pagos<br>
                 <input type="checkbox" name="permisos[contratos]" <?php echo $permisos_usuario['contratos'] ? 'checked' : ''; ?>> Contratos<br>
+                <input type="checkbox" name="permisos[reportes]" <?php echo $permisos_usuario['reportes'] ? 'checked' : ''; ?>> Reportes<br>
                 <input type="checkbox" name="permisos[caja]" <?php echo $permisos_usuario['caja'] ? 'checked' : ''; ?>> Caja<br>
             </div>
             <div class="form-group">
