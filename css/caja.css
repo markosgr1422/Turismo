@@ -1,46 +1,46 @@
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8f0; /* Fondo verde claro */
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
 .header {
-    background-color: #333;
+    background-color: #2e8b57; /* Verde oscuro */
     color: white;
-    padding: 10px;
-    text-align: right;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header a {
     color: white;
-    margin-left: 15px;
     text-decoration: none;
+    padding: 8px 12px;
+    background-color: #3cb371; /* Verde medio */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.header a:hover {
+    background-color: #228b22; /* Verde más oscuro */
 }
 
 .container {
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+h2 {
+    color: #2e8b57; /* Verde oscuro */
     margin-bottom: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
+/* Formularios */
 form {
     margin-bottom: 20px;
 }
@@ -48,32 +48,97 @@ form {
 label {
     display: block;
     margin-bottom: 5px;
+    color: #2e8b57; /* Verde oscuro */
 }
 
-input, select, button {
-    margin-bottom: 10px;
-    padding: 8px;
+input[type="text"],
+input[type="date"],
+select {
     width: 100%;
-    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
-    background-color: #333;
+    padding: 10px 20px;
+    background-color: #3cb371; /* Verde medio */
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #228b22; /* Verde más oscuro */
 }
 
-.message {
-    padding: 10px;
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-bottom: 20px;
-    border-radius: 5px;
 }
 
-.message p {
-    margin: 0;
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+}
+
+tr:hover {
+    background-color: #f0f8f0; /* Verde claro */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header a {
+        margin-top: 10px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label);
+        color: #2e8b57; /* Verde oscuro */
+        font-weight: bold;
+    }
 }

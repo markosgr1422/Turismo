@@ -12,6 +12,7 @@ if (!isset($_SESSION['permisos']['datos_usuario']) || $_SESSION['permisos']['pag
     header('Location: index.php'); // Redireccionar si no tiene permisos
     exit();
 }
+
 require_once '../db/db_config.php'; // Ajusta la ruta según tu estructura de archivos
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -50,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ver_pagos'])) {
     $pasajero_id = $_POST['pasajero_id'];
     $credencial_pago = $_POST['credencial_pago'];
 
-    $sql = "SELECT monto, fecha FROM pagos WHERE pasajero_id = ?";
+    // Modificar la consulta para incluir el método de pago
+    $sql = "SELECT monto, fecha, metodo_pago FROM pagos WHERE pasajero_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $pasajero_id);
     $stmt->execute();
@@ -100,7 +102,7 @@ function format_currency($amount) {
         }
     </style>
 </head>
-    <body>
+<body>
     <div class="header">
         <span>Usuario: <?php echo isset($_SESSION['usuario']['nombre_usuario']) ? $_SESSION['usuario']['nombre_usuario'] : ''; ?></span>
         <a href="logout.php">Cerrar Sesión</a>
@@ -159,6 +161,7 @@ function format_currency($amount) {
                         <tr>
                             <th>Fecha</th>
                             <th>Monto</th>
+                            <th>Tipo de Pago</th> <!-- Nueva columna para el tipo de pago -->
                         </tr>
                     </thead>
                     <tbody>
@@ -170,6 +173,7 @@ function format_currency($amount) {
                             <tr>
                                 <td><?php echo $pago['fecha']; ?></td>
                                 <td><?php echo format_currency($pago['monto']); ?></td>
+                                <td><?php echo ucfirst($pago['metodo_pago']); ?></td> <!-- Mostrar el tipo de pago -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
